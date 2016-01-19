@@ -52,6 +52,20 @@ public class BST {
 	public void preorder(TreeNode rootTreeNode) {
 
 	}
+	
+	public int findElement(TreeNode root, int n) {
+		// Return 1 if element is found
+		if (root == null) {
+			return 0;
+		} else if (n < root.data) {
+			return findElement(root.left, n);
+		} else if (n > root.data) {
+			return findElement(root.right, n);
+		} else if (n == root.data) {
+			return 1;
+		}
+		return 0;
+	}
 
 	public static void main(String[] args) {
 		BST bst = new BST();
@@ -61,6 +75,7 @@ public class BST {
 		bst.insertElement(7);
 		bst.insertElement(8);
 		bst.inorder(bst.root);
+		System.out.println(bst.findElement(bst.root, 10));
 
 	}
 
