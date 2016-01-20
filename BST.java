@@ -66,6 +66,61 @@ public class BST {
 		}
 		return 0;
 	}
+	
+	public void delete(TreeNode root,int element){
+		
+		/*1) If the node does not have any child directly delete the node
+		2) If the node have either left of right child replace it with the deleting node
+		3) If the node have two child then replace the node with either the right most element of left subtree or left most element of right sub tree
+*/
+		TreeNode parent = root;
+		TreeNode currentRoot = root;
+		while(currentRoot!=null && currentRoot.data != element){
+			parent = currentRoot;
+			if(currentRoot.data < element){
+				currentRoot = currentRoot.right;
+			}
+			else if(currentRoot.data > element){
+				currentRoot = currentRoot.left;
+			}
+		}
+		
+		if(currentRoot.left == null && currentRoot.right == null){
+			//Delete current Root and set parent.left or right to null
+			if(parent.left == currentRoot){
+				parent.left = null;
+			}
+			else{
+				parent.right = null;
+			}
+		}
+		
+		else if(currentRoot.left == null){
+			//Replace currentRoot by left NOde
+			if(parent.left == currentRoot){
+				parent.left = currentRoot.left;
+			}
+			else{
+				parent.right = currentRoot.left;
+			}
+		}
+		
+		else if(currentRoot.right == null){
+			//Replace currentRoot by right NOde
+			if(parent.left == currentRoot){
+				parent.left = currentRoot.right;
+			}
+			else{
+				parent.right = currentRoot.right;
+			}
+		}
+		
+		else{
+			
+			//In case current node has two nodes
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		BST bst = new BST();
@@ -74,8 +129,11 @@ public class BST {
 		bst.insertElement(11);
 		bst.insertElement(7);
 		bst.insertElement(8);
+		
+	//	System.out.println(bst.findElement(bst.root, 10));
 		bst.inorder(bst.root);
-		System.out.println(bst.findElement(bst.root, 10));
+		/*bst.delete(bst.root, 8);
+		bst.inorder(bst.root);*/
 
 	}
 
