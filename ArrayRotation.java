@@ -13,8 +13,14 @@ public class ArrayRotation {
         for (int i=0; i< Integer.parseInt(arraySizeAndRotation[0]); i++) {
             a[i] = Integer.parseInt(scanner.next());
         }
+
+        int rotateSize = Integer.parseInt(arraySizeAndRotation[1]);
+
+        if(rotateSize > a.length) {
+            rotateSize = rotateSize % a.length;
+        }
         
-        for(int i =0 ; i< Integer.parseInt(arraySizeAndRotation[1]); i++){
+        for(int i =0 ; i< rotateSize; i++){
             a = rotate(a);
         }
     
