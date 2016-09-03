@@ -3,6 +3,100 @@ class LinkedList {
 	Node head;
 
 	/*
+	* Adding the number in linkedlist. Numbers are stored in reverse order
+	* Input:
+	* First List: 5->6->3  // represents number 365
+	* Second List: 8->4->2 //  represents number 248
+	* Output
+	* Resultant list: 3->1->6  // represents number 613
+	*/
+	public Node addTwoNumbersInReverseOrder(Node l1, Node l2) {
+        int carryOver = 0;
+        Node head = null;
+        while(l1 != null && l2 != null) {
+            
+            int first = l1.val;
+            int second = l2.val;
+            
+            int result = 0;
+            result = first + second + carryOver;
+            
+            int[] results = calculateResultAndCarryOver(result);
+            result = results[0];
+            carryOver = results[1];
+            
+            head = insertLast(head, result);
+            
+            l2 = l2.next;
+            l1 = l1.next;    
+        }
+        
+        while(l1 != null) {
+            int result = l1.val + carryOver;
+            int[] results = calculateResultAndCarryOver(result);
+            result = results[0];
+            carryOver = results[1];
+            
+            head = insertLast(head, result);
+            
+            l1 = l1.next;
+        }
+        
+        while(l2 != null) {
+            int result = 0;
+            result = l2.val + carryOver;
+            int[] results = calculateResultAndCarryOver(result);
+            result = results[0];
+            carryOver = results[1];
+            
+            head = insertLast(head, result);
+            l2 = l2.next;
+        }
+        
+        if(carryOver != 0) {
+            insertLast(head, carryOver);
+        }
+        return head;
+    }
+    
+    private int[] calculateResultAndCarryOver(int result) {
+        // Zeroth index contains result, First Index contains carryOver
+        int results[] = new int[2];
+        
+       if((result/10) != 0) {
+           results[0] = result%10;
+           results[1] = (result/10);
+       }
+       else {
+           results[0] = result;
+           results[1] = 0;
+       }
+       
+        return results;
+    }
+    
+    /*
+	* Inserting node at the end of the linkedlist
+    */
+    public Node insertLast(Node head, int val) {
+        
+        if(head == null) {
+            head = new Node(val);
+        }
+        
+        else {
+            Node temp = head;
+            while(temp.next != null) {
+                temp = temp.next;
+            }
+            Node newNode = new Node(val);
+            temp.next = newNode;
+        }
+        
+        return head;
+    }
+
+	/*
 		swapping nodes in linkedlist
 	*/
 
@@ -46,20 +140,6 @@ class LinkedList {
 		curr2.next = temp;
 	}
 
-	/*
-	* Insertion method for linkedlist at the front
-	*/
-
-	public void push(int val) {
-		Node n = new Node(val);
-		if(head == null) {
-			head = n;
-		}
-		else {
-			n.next = head;
-			head = n;
-		}
-	}
 
 	public void print() {
 		Node temp = head;
@@ -71,11 +151,11 @@ class LinkedList {
 
 	public static void main(String arr[]) {
 		LinkedList l = new LinkedList();
-		l.push(1);
-		l.push(2);
-		l.push(10);
-		l.push(3);
-		l.push(5);
+		l.insertLast(1);
+		l.insertLast(2);
+		l.insertLast(10);
+		l.insertLast(3);
+		l.insertLast(5);
 
 		l.print();
 
