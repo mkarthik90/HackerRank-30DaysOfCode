@@ -58,6 +58,74 @@ class LinkedList {
         }
         return head;
     }
+
+    /*
+	* Program to find the node at which the intersection of two singly linked lists begins.
+	* A:          a1 → a2
+    *               ↘
+    *                 c1 → c2 → c3
+    *               ↗            
+	* B:     b1 → b2 → b3
+    */
+
+    public Node getIntersectionNode(Node headA, Node headB) {
+        
+        if(headA == null || headB == null){
+            return null;
+        }
+        
+        Node tempA = headA;
+        Node tempB = headB;
+        int sizeA = 0;
+        int sizeB = 0;
+        while(tempA != null) {
+            tempA = tempA.next;
+            sizeA++;
+        }
+        
+        while(tempB != null) {
+            tempB = tempB.next;
+            sizeB++;
+        }
+        
+        tempA = headA;
+        tempB = headB;
+        int diff = 0;
+        if(sizeA > sizeB) {
+            // A is the bigger linked list
+            diff = sizeA - sizeB;
+            while(diff != 0) {
+                tempA = tempA.next;
+                diff--;
+            }
+            
+            while(tempA !=null && tempB != null) {
+                if(tempA.val == tempB.val) {
+                    return tempA;
+                }
+                tempA = tempA.next;
+                tempB = tempB.next;
+            }
+        }
+        else {
+            diff = sizeB - sizeA;
+            while(diff != 0) {
+                tempB = tempB.next;
+                diff--;
+            }
+            
+            while(tempA != null && tempB != null) {
+                if(tempA.val == tempB.val) {
+                    return tempB;
+                }
+                tempA = tempA.next;
+                tempB = tempB.next;
+            }
+        }
+        
+        return null;
+        
+    }
     
     private int[] calculateResultAndCarryOver(int result) {
         // Zeroth index contains result, First Index contains carryOver
