@@ -1,3 +1,13 @@
+/*
+* http://www.geeksforgeeks.org/largest-product-subarray-size-k/
+* Given an array consisting of n positive integers, and an integer k. Find the largest product subarray of size k, 
+* i.e., find maximum produce of k contiguous elements in the array where k <= n. Examples:
+* Input: arr[] = {1, 5, 9, 8, 2, 4,
+*                 1, 8, 1, 2} 
+*       k = 6
+* Output:   4608  
+*/
+
 class MaximumProductSubArray {
 
 	public int findMaxSubArray(int[] arr, int k) {
