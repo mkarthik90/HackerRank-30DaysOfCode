@@ -217,6 +217,25 @@ class LinkedList {
 		}
 	}
 
+    /**
+    * This function removes duplicate from sorted linked list
+    **/
+    public Node removeDuplicates(Node head) {
+        if(head == null) {
+            return head;
+        }
+        Node tempHead = head;
+        while(head.next != null) {
+            if(head.val == head.next.val) {
+                // Remove head.val and do not move the head
+                head.next = head.next.next;
+            } else {
+                head = head.next;
+            }
+        }
+        return tempHead;
+    }
+
 	public static void main(String arr[]) {
 		LinkedList l = new LinkedList();
 		l.insertLast(1);
