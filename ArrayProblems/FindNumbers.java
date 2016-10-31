@@ -44,7 +44,7 @@ public class FindNumbers {
     }
 
     public static void main(String[] args) {
-        int[] a = { 4, 4, 3, 3, 4, 5 };
+        int[] a = { 7,7,7,2,2,3,4,4,5};
         System.out.println(findMaximumOccurenceInNNumbers(a));
     }
 
